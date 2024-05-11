@@ -10,7 +10,7 @@ export default function Collapse({ isOpen, children }: CollapseProps) {
   return (
     <motion.div
       className="w-full overflow-hidden"
-      initial={{ height: "fit-content" }}
+      initial={false}
       animate={{ height: isOpen ? "fit-content" : 0 }}
     >
       {children}
