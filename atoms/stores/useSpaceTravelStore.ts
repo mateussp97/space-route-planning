@@ -1,9 +1,9 @@
 import {
   fuelConsumptionRatio,
   fuelTankCapacity,
-  planetDistances,
   refuelingStations,
 } from "@/utils/constants";
+import { getDistance } from "@/utils/functions";
 import { atom, useAtom } from "jotai";
 import { useCallback } from "react";
 
@@ -30,22 +30,25 @@ export function useSpaceTravelStore() {
 
   // Calcular combustível necessário e verificar se a viagem é possível
   const requiredFuel = destinationPlanet
-    ? (planetDistances[`${currentPlanet}_${destinationPlanet}`] || 0) *
-      fuelConsumptionRatio
+    ? getDistance(currentPlanet, destinationPlanet) * fuelConsumptionRatio
     : 0;
   const isTripPossible = availableFuel >= requiredFuel;
 
-  // Encontrar a estação de reabastecimento mais próxima se necessário
+  // Encontrar a estação de reabastecimento mais próxima usando a função getDistance
   const nearestRefuelStation = (() => {
     let closestStation = null;
     let minDistance = Infinity;
-    Object.entries(refuelingStations).forEach(([station, distances]) => {
-      const distance = distances[currentPlanet];
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestStation = station;
-      }
-    });
+
+    refuelingStations
+      .filter((p) => p !== currentPlanet)
+      .forEach((station) => {
+        const distance = getDistance(currentPlanet, station);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestStation = station;
+        }
+      });
+
     return closestStation;
   })();
 
