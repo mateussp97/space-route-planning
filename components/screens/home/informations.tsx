@@ -6,8 +6,10 @@ import { Separator } from "@/components/ui/separator";
 
 import { useSpaceTravelStore } from "@/atoms/stores/useSpaceTravelStore";
 import { fuelTankCapacity } from "@/utils/constants";
-import { getPlanetIcon } from "@/utils/functions";
+import { formatNumber, getPlanetIcon } from "@/utils/functions";
 
+import { langAtom } from "@/atoms/langAtom";
+import { useAtomValue } from "jotai";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
@@ -20,6 +22,8 @@ export default function Informations() {
     requiredFuel,
   } = useSpaceTravelStore();
   const t = useTranslations("home");
+
+  const lang = useAtomValue(langAtom);
 
   const nearestRefuelingStationIcon =
     nearestRefuelStation && getPlanetIcon(nearestRefuelStation);
@@ -36,7 +40,10 @@ export default function Informations() {
           <span className="flex items-center justify-between">
             <p className="text-muted-foreground">{t("fuel-available")}:</p>
             <p>
-              {availableFuel}L ({percentageOfFuelRemaining.toFixed(2)}%)
+              {t("fuel-capacity-in-liters", {
+                fuel: formatNumber(availableFuel, lang),
+              })}{" "}
+              ({percentageOfFuelRemaining.toFixed(2)}%)
             </p>
           </span>
 
@@ -68,7 +75,11 @@ export default function Informations() {
               <span className="text-muted-foreground">
                 {t("required-fuel")}
               </span>
-              <span>{requiredFuel}L</span>
+              <span>
+                {t("fuel-capacity-in-liters", {
+                  fuel: formatNumber(requiredFuel, lang),
+                })}
+              </span>
             </li>
             <li className="flex items-center justify-between">
               <span className="text-muted-foreground">

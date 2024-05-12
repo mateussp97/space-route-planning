@@ -1,9 +1,26 @@
 import Form from "@/components/screens/home/form";
-import Header from "@/components/screens/home/header";
+import Header from "@/components/screens/home/header/header";
 import Informations from "@/components/screens/home/informations";
 import Map from "@/components/screens/home/map";
 import RefuelAlert from "@/components/screens/home/refuel-alert";
 import TravelHistory from "@/components/screens/home/travel-history";
+
+import { getTranslations } from "next-intl/server";
+
+export async function generateMetadata({
+  params: { locale },
+}: {
+  params: {
+    locale: string;
+  };
+}) {
+  const t = await getTranslations({ locale, namespace: "metadata" });
+
+  return {
+    title: t("page-title"),
+    description: t("page-description"),
+  };
+}
 
 export default function Page({ params }: { params: { locale: string } }) {
   return (

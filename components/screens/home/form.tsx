@@ -13,7 +13,6 @@ import {
 import { useSpaceTravelStore } from "@/atoms/stores/useSpaceTravelStore";
 import { planets } from "@/utils/constants";
 
-import { toast } from "@/components/ui/use-toast";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
@@ -21,27 +20,9 @@ export default function Form() {
   const {
     currentPlanet,
     destinationPlanet,
-    isTripPossible,
-    requiredFuel,
-    availableFuel,
     methods: { setDestinationPlanet, submitTrip },
   } = useSpaceTravelStore();
   const t = useTranslations("home");
-
-  function handleSubmitTrip() {
-    submitTrip();
-    toast({
-      variant: "positive",
-      title: t("trip-successful-title", {
-        from: t(currentPlanet),
-        to: t(destinationPlanet),
-      }),
-      description: t("trip-successful-description", {
-        spentFuel: requiredFuel,
-        remainingFuel: availableFuel - requiredFuel,
-      }),
-    });
-  }
 
   return (
     <fieldset className="grid gap-6 rounded-lg border p-4">
@@ -53,7 +34,7 @@ export default function Form() {
             id="current-location"
             className="items-start [&_[data-description]]:hidden"
           >
-            <SelectValue placeholder="Select a planet" />
+            <SelectValue placeholder={t("selecte-a-planet")} />
           </SelectTrigger>
           <SelectContent>
             {planets.map((planet) => (
@@ -85,7 +66,7 @@ export default function Form() {
             id="destination"
             className="items-start [&_[data-description]]:hidden"
           >
-            <SelectValue placeholder="Select a planet" />
+            <SelectValue placeholder={t("selecte-a-planet")} />
           </SelectTrigger>
           <SelectContent>
             {planets
@@ -112,11 +93,7 @@ export default function Form() {
         </Select>
       </div>
 
-      <Button
-        type="button"
-        onClick={handleSubmitTrip}
-        disabled={!isTripPossible || !destinationPlanet}
-      >
+      <Button type="button" onClick={submitTrip} disabled={!destinationPlanet}>
         {t("make-the-journey")}
       </Button>
     </fieldset>

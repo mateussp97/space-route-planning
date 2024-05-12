@@ -53,7 +53,7 @@ export default function Map() {
                 layoutId="spaceship"
                 src="/spaceship.png"
                 alt="Spaceship"
-                className="w-10 h-fit object-contain absolute top-0"
+                className="w-14 h-fit object-contain absolute top-0"
               />
             ) : null}
           </div>

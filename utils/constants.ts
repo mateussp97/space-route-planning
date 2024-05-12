@@ -67,3 +67,5 @@ export const languages = [
     value: "en",
   },
 ];
+
+export const URL = "https://latitudesh-spaceship.vercel.app/";

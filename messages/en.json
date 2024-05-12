@@ -1,7 +1,18 @@
 {
+  "metadata": {
+    "page-title": "Latitude.sh Spaceship",
+    "page-description": "A complete simulation of travel through the solar system."
+  },
   "home": {
+    "made-by": "Made by",
+    "empty-travel-history-title": "You don't have any travel yet!",
+    "empty-travel-history-description": "Make at least one travel to appear in your history.",
+    "fuel-capacity-in-liters": "{fuel} Liters",
+    "trip-not-possible-title": "Trip Not Possible: from {from} to {to}",
+    "trip-not-possible-description": "The trip is not possible due to insufficient fuel. Required fuel: {spentFuel}, but only {remainingFuel} available.",
+    "selecte-a-planet": "Select a planet",
     "trip-successful-title": "Successful Trip: from {from} to {to}",
-    "trip-successful-description": "On this trip, you spent {spentFuel}L of fuel, leaving you with {remainingFuel}L available.",
+    "trip-successful-description": "On this trip, you spent {spentFuel} of fuel, leaving you with {remainingFuel} available.",
     "emergency-refueling": "Emergency Refueling",
     "assistance-has-arrived-and-your-spaceship-has-been-refueled": "Assistance has arrived, and your spaceship has been refueled. You're ready to continue your journey!",
     "refuel-successful": "Refuel Successful",

@@ -45,3 +45,12 @@ export function getDistance(from: string, to: string): number {
   }
   return distance;
 }
+
+export function formatNumber(number: number, lang: string) {
+  const locale: { [key: string]: string } = {
+    en: "en-US",
+    pt: "pt-BR",
+  };
+
+  return new Intl.NumberFormat(locale[lang]).format(number);
+}

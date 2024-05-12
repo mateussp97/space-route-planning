@@ -1,12 +1,15 @@
+import { toast } from "@/components/ui/use-toast";
 import {
   fuelConsumptionRatio,
   fuelTankCapacity,
   planets,
   refuelingStations,
 } from "@/utils/constants";
-import { getDistance } from "@/utils/functions";
+import { formatNumber, getDistance } from "@/utils/functions";
 import { atom, useAtom, useAtomValue } from "jotai";
+import { useTranslations } from "next-intl";
 import { useCallback } from "react";
+import { langAtom } from "../langAtom";
 
 const currentPlanetAtom = atom<string>("jupiter");
 const destinationPlanetAtom = atom<string>("");
@@ -41,6 +44,8 @@ const isStrandedAtom = atom<boolean>((get) => {
 });
 
 export function useSpaceTravelStore() {
+  const t = useTranslations("home");
+
   const [currentPlanet, setCurrentPlanet] = useAtom(currentPlanetAtom);
   const [destinationPlanet, setDestinationPlanet] = useAtom(
     destinationPlanetAtom
@@ -48,6 +53,7 @@ export function useSpaceTravelStore() {
   const [availableFuel, setAvailableFuel] = useAtom(availableFuelAtom);
   const [travelHistory, setTravelHistory] = useAtom(travelHistoryAtom);
   const isStranded = useAtomValue(isStrandedAtom);
+  const lang = useAtomValue(langAtom);
 
   // Calcular combustível necessário e verificar se a viagem é possível
   const requiredFuel = destinationPlanet
@@ -88,7 +94,38 @@ export function useSpaceTravelStore() {
           createdAt: new Date(),
         },
       ]);
+      toast({
+        variant: "positive",
+        title: t("trip-successful-title", {
+          from: t(currentPlanet),
+          to: t(destinationPlanet),
+        }),
+        description: t("trip-successful-description", {
+          spentFuel: t("fuel-capacity-in-liters", {
+            fuel: formatNumber(requiredFuel, lang),
+          }),
+          remainingFuel: t("fuel-capacity-in-liters", {
+            fuel: formatNumber(availableFuel - requiredFuel, lang),
+          }),
+        }),
+      });
       setDestinationPlanet(""); // Resetar o destino após a viagem
+    } else {
+      toast({
+        variant: "destructive",
+        title: t("trip-not-possible-title", {
+          from: t(currentPlanet),
+          to: t(destinationPlanet),
+        }),
+        description: t("trip-not-possible-description", {
+          spentFuel: t("fuel-capacity-in-liters", {
+            fuel: formatNumber(requiredFuel, lang),
+          }),
+          remainingFuel: t("fuel-capacity-in-liters", {
+            fuel: formatNumber(availableFuel, lang),
+          }),
+        }),
+      });
     }
   }, [
     isTripPossible,

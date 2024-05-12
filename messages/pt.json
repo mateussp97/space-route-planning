@@ -1,7 +1,18 @@
 {
+  "metadata": {
+    "page-title": "Latitude.sh Espaçonave",
+    "page-description": "Uma simulação completa de viagens pelo sistema solar."
+  },
   "home": {
+    "made-by": "Feito por",
+    "empty-travel-history-title": "Você ainda não tem nenhuma viagem!",
+    "empty-travel-history-description": "Faça pelo menos uma viagem para aparecer em seu histórico de viagens.",
+    "fuel-capacity-in-liters": "{fuel} Litros",
+    "trip-not-possible-title": "Viagem Não Possível: de {from} para {to}",
+    "trip-not-possible-description": "A viagem não é possível devido à falta de combustível. Combustível necessário: {spentFuel}, mas apenas {remainingFuel} disponível.",
+    "selecte-a-planet": "Selecione um planeta",
     "trip-successful-title": "Viagem bem-sucedida: de {from} para {to}",
-    "trip-successful-description": "Nessa viagem, você gastou {spentFuel}L de combustível, ficando agora com {remainingFuel}L disponível.",
+    "trip-successful-description": "Nessa viagem, você gastou {spentFuel} de combustível, ficando agora com {remainingFuel} disponível.",
     "emergency-refueling": "Reabastecimento de Emergência",
     "assistance-has-arrived-and-your-spaceship-has-been-refueled": "A ajuda chegou e sua nave foi reabastecida. Você está pronto para continuar sua jornada!",
     "refuel-successful": "Reabastecimento Bem-sucedido",
