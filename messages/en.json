@@ -1,5 +1,14 @@
 {
   "home": {
+    "trip-successful-title": "Successful Trip: from {from} to {to}",
+    "trip-successful-description": "On this trip, you spent {spentFuel}L of fuel, leaving you with {remainingFuel}L available.",
+    "emergency-refueling": "Emergency Refueling",
+    "assistance-has-arrived-and-your-spaceship-has-been-refueled": "Assistance has arrived, and your spaceship has been refueled. You're ready to continue your journey!",
+    "refuel-successful": "Refuel Successful",
+    "your-spaceship-has-been-successfully-refueled": "Your spaceship has been successfully refueled. Ready for the next journey!",
+    "you-are-stranded": "You are stranded!",
+    "you-cannot-reach-any-refueling-station-or-other-planets-with-the-remaining-fuel": "You cannot reach any refueling station or other planets with the remaining fuel. Click on the button to call for assistance.",
+    "ask-for-help": "Ask for help",
     "you-are-on-a-planet-that-has-a-fuel-station": "You are on a planet that has a fuel station!",
     "click-on-the-button-to-execute-the-refueling-action-on-the-spaceship": "Click on the button to execute the refueling action on the spaceship.",
     "refuel-the-spaceship": "Refuel the spaceship",

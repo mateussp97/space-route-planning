@@ -1,5 +1,14 @@
 {
   "home": {
+    "trip-successful-title": "Viagem bem-sucedida: de {from} para {to}",
+    "trip-successful-description": "Nessa viagem, você gastou {spentFuel}L de combustível, ficando agora com {remainingFuel}L disponível.",
+    "emergency-refueling": "Reabastecimento de Emergência",
+    "assistance-has-arrived-and-your-spaceship-has-been-refueled": "A ajuda chegou e sua nave foi reabastecida. Você está pronto para continuar sua jornada!",
+    "refuel-successful": "Reabastecimento Bem-sucedido",
+    "your-spaceship-has-been-successfully-refueled": "Sua nave foi reabastecida com sucesso. Pronto para a próxima jornada!",
+    "you-are-stranded": "Você está isolado!",
+    "you-cannot-reach-any-refueling-station-or-other-planets-with-the-remaining-fuel": "Não é possível alcançar nenhuma estação de reabastecimento ou outros planetas com o combustível restante. Clique no botão para pedir ajuda.",
+    "ask-for-help": "Solicitar ajuda",
     "you-are-on-a-planet-that-has-a-fuel-station": "Você está em um planeta que possui uma estação de combustível!",
     "click-on-the-button-to-execute-the-refueling-action-on-the-spaceship": "Clique no botão para executar a ação de reabastecimento na nave espacial.",
     "refuel-the-spaceship": "Reabastecer a nave espacial",

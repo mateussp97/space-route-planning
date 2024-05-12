@@ -73,7 +73,7 @@ export default function Header({ locale }: HeaderProps) {
           <Button
             variant="outline"
             size="sm"
-            className="ml-auto gap-1.5 text-sm"
+            className="gap-1.5 text-sm hidden sm:flex"
           >
             <Share className="size-3.5" />
             Share

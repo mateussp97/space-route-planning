@@ -13,6 +13,7 @@ import {
 import { useSpaceTravelStore } from "@/atoms/stores/useSpaceTravelStore";
 import { planets } from "@/utils/constants";
 
+import { toast } from "@/components/ui/use-toast";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
@@ -21,9 +22,26 @@ export default function Form() {
     currentPlanet,
     destinationPlanet,
     isTripPossible,
+    requiredFuel,
+    availableFuel,
     methods: { setDestinationPlanet, submitTrip },
   } = useSpaceTravelStore();
   const t = useTranslations("home");
+
+  function handleSubmitTrip() {
+    submitTrip();
+    toast({
+      variant: "positive",
+      title: t("trip-successful-title", {
+        from: t(currentPlanet),
+        to: t(destinationPlanet),
+      }),
+      description: t("trip-successful-description", {
+        spentFuel: requiredFuel,
+        remainingFuel: availableFuel - requiredFuel,
+      }),
+    });
+  }
 
   return (
     <fieldset className="grid gap-6 rounded-lg border p-4">
@@ -96,7 +114,7 @@ export default function Form() {
 
       <Button
         type="button"
-        onClick={submitTrip}
+        onClick={handleSubmitTrip}
         disabled={!isTripPossible || !destinationPlanet}
       >
         {t("make-the-journey")}

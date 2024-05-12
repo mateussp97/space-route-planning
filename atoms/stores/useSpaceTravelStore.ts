@@ -1,10 +1,11 @@
 import {
   fuelConsumptionRatio,
   fuelTankCapacity,
+  planets,
   refuelingStations,
 } from "@/utils/constants";
 import { getDistance } from "@/utils/functions";
-import { atom, useAtom } from "jotai";
+import { atom, useAtom, useAtomValue } from "jotai";
 import { useCallback } from "react";
 
 const currentPlanetAtom = atom<string>("jupiter");
@@ -19,6 +20,25 @@ const travelHistoryAtom = atom<
     createdAt: Date;
   }[]
 >([]);
+const isStrandedAtom = atom<boolean>((get) => {
+  const currentPlanet = get(currentPlanetAtom);
+  const availableFuel = get(availableFuelAtom);
+  const canReachAnyRefuelingStation = refuelingStations.some((station) => {
+    const distanceToStation = getDistance(currentPlanet, station);
+    return availableFuel >= distanceToStation * fuelConsumptionRatio;
+  });
+
+  // Verifica também se pode chegar a qualquer outro planeta
+  const canReachAnyPlanet = planets.some((planet) => {
+    if (planet.name !== currentPlanet) {
+      const distanceToPlanet = getDistance(currentPlanet, planet.name);
+      return availableFuel >= distanceToPlanet * fuelConsumptionRatio;
+    }
+    return false;
+  });
+
+  return !(canReachAnyRefuelingStation || canReachAnyPlanet);
+});
 
 export function useSpaceTravelStore() {
   const [currentPlanet, setCurrentPlanet] = useAtom(currentPlanetAtom);
@@ -27,6 +47,7 @@ export function useSpaceTravelStore() {
   );
   const [availableFuel, setAvailableFuel] = useAtom(availableFuelAtom);
   const [travelHistory, setTravelHistory] = useAtom(travelHistoryAtom);
+  const isStranded = useAtomValue(isStrandedAtom);
 
   // Calcular combustível necessário e verificar se a viagem é possível
   const requiredFuel = destinationPlanet
@@ -68,8 +89,6 @@ export function useSpaceTravelStore() {
         },
       ]);
       setDestinationPlanet(""); // Resetar o destino após a viagem
-    } else {
-      alert("Não há combustível suficiente para a viagem!");
     }
   }, [
     isTripPossible,
@@ -81,9 +100,7 @@ export function useSpaceTravelStore() {
 
   // Função para abastecer
   const refuel = useCallback(() => {
-    if (refuelingStations.includes(currentPlanet)) {
-      setAvailableFuel(fuelTankCapacity);
-    }
+    setAvailableFuel(fuelTankCapacity);
   }, [currentPlanet]);
 
   return {
@@ -94,6 +111,7 @@ export function useSpaceTravelStore() {
     isTripPossible,
     nearestRefuelStation,
     requiredFuel,
+    isStranded,
     methods: {
       setDestinationPlanet,
       setAvailableFuel,
