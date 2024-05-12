@@ -1,5 +1,8 @@
 {
   "home": {
+    "you-are-on-a-planet-that-has-a-fuel-station": "Você está em um planeta que possui uma estação de combustível!",
+    "click-on-the-button-to-execute-the-refueling-action-on-the-spaceship": "Clique no botão para executar a ação de reabastecimento na nave espacial.",
+    "refuel-the-spaceship": "Reabastecer a nave espacial",
     "portuguese": "Português",
     "english": "Inglês",
     "mercury": "Mercúrio",

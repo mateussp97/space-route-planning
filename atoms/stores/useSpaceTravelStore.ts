@@ -79,6 +79,13 @@ export function useSpaceTravelStore() {
     requiredFuel,
   ]);
 
+  // Função para abastecer
+  const refuel = useCallback(() => {
+    if (refuelingStations.includes(currentPlanet)) {
+      setAvailableFuel(fuelTankCapacity);
+    }
+  }, [currentPlanet]);
+
   return {
     currentPlanet,
     destinationPlanet,
@@ -91,6 +98,7 @@ export function useSpaceTravelStore() {
       setDestinationPlanet,
       setAvailableFuel,
       submitTrip,
+      refuel,
     },
   };
 }

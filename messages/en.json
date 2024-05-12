@@ -1,5 +1,8 @@
 {
   "home": {
+    "you-are-on-a-planet-that-has-a-fuel-station": "You are on a planet that has a fuel station!",
+    "click-on-the-button-to-execute-the-refueling-action-on-the-spaceship": "Click on the button to execute the refueling action on the spaceship.",
+    "refuel-the-spaceship": "Refuel the spaceship",
     "portuguese": "Portuguese",
     "english": "English",
     "mercury": "Mercury",
