@@ -4,7 +4,7 @@ This document serves as a comprehensive guide for the Space Route Planning Syste
 
 ## Preview
 
-[Click to watch the video](/public/latitudesh-spaceship.mp4)
+![](./public/latitudesh-spaceship.gif)
 
 ## Functional Requirements
 
