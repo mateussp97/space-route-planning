@@ -8,13 +8,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 import { Toaster } from "@/components/ui/toaster";
-import { URL as url } from "@/utils/constants";
-import { Metadata } from "next";
 import "./globals.css";
-
-export const metadata: Metadata = {
-  metadataBase: new URL(url),
-};
 
 export default async function LocaleLayout({
   children,
