@@ -7,7 +7,7 @@ import { getDistance } from "@/utils/functions";
 import { atom, useAtom } from "jotai";
 import { useCallback } from "react";
 
-const currentPlanetAtom = atom<string>("Jupiter");
+const currentPlanetAtom = atom<string>("jupiter");
 const destinationPlanetAtom = atom<string>("");
 const availableFuelAtom = atom<number>(fuelTankCapacity);
 const travelHistoryAtom = atom<

@@ -13,6 +13,7 @@ import {
 import { useSpaceTravelStore } from "@/atoms/stores/useSpaceTravelStore";
 import { planets } from "@/utils/constants";
 
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 export default function Form() {
@@ -22,15 +23,16 @@ export default function Form() {
     isTripPossible,
     methods: { setDestinationPlanet, submitTrip },
   } = useSpaceTravelStore();
+  const t = useTranslations("home");
 
   return (
     <fieldset className="grid gap-6 rounded-lg border p-4">
-      <legend className="-ml-1 px-1 text-sm font-medium">Form</legend>
+      <legend className="-ml-1 px-1 text-sm font-medium">{t("form")}</legend>
       <div className="grid gap-3">
-        <Label htmlFor="model">Current Location:</Label>
+        <Label htmlFor="current-location">{t("current-location")}:</Label>
         <Select value={currentPlanet} disabled>
           <SelectTrigger
-            id="model"
+            id="current-location"
             className="items-start [&_[data-description]]:hidden"
           >
             <SelectValue placeholder="Select a planet" />
@@ -46,9 +48,9 @@ export default function Form() {
                     height={20}
                   />
                   <div className="grid gap-0.5">
-                    <p>{planet.name}</p>
+                    <p>{t(planet.name)}</p>
                     <p className="text-xs" data-description>
-                      {planet.description}
+                      {t(planet.description)}
                     </p>
                   </div>
                 </div>
@@ -59,13 +61,13 @@ export default function Form() {
       </div>
 
       <div className="grid gap-3">
-        <Label htmlFor="model">Destination:</Label>
+        <Label htmlFor="destination">{t("destination")}:</Label>
         <Select value={destinationPlanet} onValueChange={setDestinationPlanet}>
           <SelectTrigger
-            id="model"
+            id="destination"
             className="items-start [&_[data-description]]:hidden"
           >
-            <SelectValue placeholder="Select a model" />
+            <SelectValue placeholder="Select a planet" />
           </SelectTrigger>
           <SelectContent>
             {planets
@@ -80,9 +82,9 @@ export default function Form() {
                       height={20}
                     />
                     <div className="grid gap-0.5">
-                      <p>{planet.name}</p>
+                      <p>{t(planet.name)}</p>
                       <p className="text-xs" data-description>
-                        {planet.description}
+                        {t(planet.description)}
                       </p>
                     </div>
                   </div>
@@ -97,7 +99,7 @@ export default function Form() {
         onClick={submitTrip}
         disabled={!isTripPossible || !destinationPlanet}
       >
-        Make the journey
+        {t("make-the-journey")}
       </Button>
     </fieldset>
   );

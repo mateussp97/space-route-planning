@@ -21,13 +21,13 @@ export function getDistance(from: string, to: string): number {
 
   // Ordene os planetas para sempre buscar no sentido Mercury -> Uranus.
   const planets = [
-    "Mercury",
-    "Venus",
-    "Earth",
-    "Mars",
-    "Jupiter",
-    "Saturn",
-    "Uranus",
+    "mercury",
+    "venus",
+    "earth",
+    "mars",
+    "jupiter",
+    "saturn",
+    "uranus",
   ];
   const startIndex = planets.indexOf(from);
   const endIndex = planets.indexOf(to);

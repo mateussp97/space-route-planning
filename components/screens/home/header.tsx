@@ -7,18 +7,25 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Link, usePathname } from "@/navigation";
 
 import LatitudeSh from "@/public/latitude-sh.svg";
 import { languages } from "@/utils/constants";
 
 import { Share } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useState } from "react";
 
-export default function Header() {
-  const [lang, setLang] = useState("en");
+interface HeaderProps {
+  locale: string;
+}
 
-  const currentLanguage = languages.find((language) => language.value === lang);
+export default function Header({ locale }: HeaderProps) {
+  const currentLanguage = languages.find(
+    (language) => language.value === locale
+  );
+  const pathname = usePathname();
+  const t = useTranslations("home");
 
   return (
     <header className="w-full h-fit bg-transparent p-4 border-b flex items-center justify-between">
@@ -42,21 +49,22 @@ export default function Header() {
                   src={currentLanguage?.icon}
                   alt={currentLanguage?.title}
                 />
-                {currentLanguage?.title}
+                {t(currentLanguage?.title)}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               {languages.map((language) => (
-                <DropdownMenuItem
-                  key={language.title}
-                  onClick={() => setLang(language.value)}
-                >
-                  <img
-                    className="w-5 h-fit object-contain mr-2"
-                    src={language.icon}
-                    alt={language.title}
-                  />
-                  {language.title}
+                <DropdownMenuItem key={language.title}>
+                  <Link href={pathname} locale={language.value as "pt" | "en"}>
+                    <div className="w-full flex">
+                      <img
+                        className="w-5 h-fit object-contain mr-2"
+                        src={language.icon}
+                        alt={t(language.title)}
+                      />
+                      {t(language.title)}
+                    </div>
+                  </Link>
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
