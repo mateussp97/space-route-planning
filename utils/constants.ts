@@ -54,3 +54,21 @@ export const fuelConsumptionRatio = 0.0001; // Consumo de combustível em litros
 
 // Lista de planetas que têm estações de reabastecimento
 export const refuelingStations = ["Mercury", "Earth", "Saturn", "Uranus"];
+
+export const languages = [
+  {
+    title: "Spanish",
+    icon: "/espanha.png",
+    value: "esp",
+  },
+  {
+    title: "Portuguese",
+    icon: "/brasil.png",
+    value: "pt",
+  },
+  {
+    title: "English",
+    icon: "/estados-unidos.png",
+    value: "en",
+  },
+];
