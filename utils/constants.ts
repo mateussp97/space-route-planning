@@ -2,6 +2,7 @@ interface PlanetDistances {
   [key: string]: number;
 }
 
+// Distância entre planetas especificados pela documentação.
 export const planetDistances: PlanetDistances = {
   mercury_venus: 50000000,
   venus_earth: 40000000,
@@ -11,6 +12,7 @@ export const planetDistances: PlanetDistances = {
   saturn_uranus: 900000000,
 };
 
+// Lista de planetas.
 export const planets = [
   {
     icon: "./mercury.svg",
@@ -49,12 +51,16 @@ export const planets = [
   },
 ];
 
-export const fuelTankCapacity = 90000; // Capacidade do tanque em litros
-export const fuelConsumptionRatio = 0.0001; // Consumo de combustível em litros por quilômetro
+// Capacidade do tanque em litros.
+export const fuelTankCapacity = 90000;
 
-// Lista de planetas que têm estações de reabastecimento
+// Consumo de combustível em litros por quilômetro.
+export const fuelConsumptionRatio = 0.0001;
+
+// Lista de planetas que têm estações de reabastecimento.
 export const refuelingStations = ["mercury", "earth", "saturn", "uranus"];
 
+// Lista dos idiomas da aplicação.
 export const languages = [
   {
     title: "portuguese",
