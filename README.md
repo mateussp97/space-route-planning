@@ -6,6 +6,10 @@ This document serves as a comprehensive guide for the Space Route Planning Syste
 
 ![](./public/latitudesh-spaceship.gif)
 
+## Link
+
+[Click to open the project](https://latitudesh-spaceship.vercel.app)
+
 ## Functional Requirements
 
 The system was developed with the following functional requirements in mind:
@@ -75,6 +79,7 @@ The system was developed with the following functional requirements in mind:
 - **lucide-react**
 - **framer-motion**
 - **dayjs**
+- **Vercel**
 
 ## Conclusion
 
