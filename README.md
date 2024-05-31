@@ -81,6 +81,32 @@ The system was developed with the following functional requirements in mind:
 - **dayjs**
 - **Vercel**
 
+## How to Run the Project
+
+1. Clone this repository:
+
+```bash
+git clone https://github.com/mateussp97/latitudesh-spaceship.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd latitudesh-spaceship
+```
+
+3. Navigate to the project directory:
+
+```bash
+pnpm install
+```
+
+4. Start the development:
+
+```bash
+pnpm run dev
+```
+
 ## Conclusion
 
 This system represents an effort to combine technical accuracy with usability, ensuring that astronauts and space enthusiasts can efficiently and informatively plan their trips through the solar system. The integration of various modern technologies and design practices provides an exceptional user experience that is accessible globally.

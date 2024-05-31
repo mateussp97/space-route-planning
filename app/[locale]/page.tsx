@@ -1,9 +1,9 @@
 import Form from "@/components/screens/home/form";
 import Header from "@/components/screens/home/header/header";
 import Informations from "@/components/screens/home/informations";
-import Map from "@/components/screens/home/map";
+import Map from "@/components/screens/home/map/map";
 import RefuelAlert from "@/components/screens/home/refuel-alert";
-import TravelHistory from "@/components/screens/home/travel-history";
+import TravelHistory from "@/components/screens/home/travel-history/travel-history";
 
 import { getTranslations } from "next-intl/server";
 

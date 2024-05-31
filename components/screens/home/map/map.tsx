@@ -1,20 +1,16 @@
-"use client";
-
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { useSpaceTravelStore } from "@/atoms/stores/useSpaceTravelStore";
 import { planets, refuelingStations } from "@/utils/constants";
 
-import { motion } from "framer-motion";
 import { Fuel } from "lucide-react";
 import { useTranslations } from "next-intl";
+import SpaceshipImg from "./spaceship-img";
 
 export default function Map() {
-  const { currentPlanet } = useSpaceTravelStore();
   const t = useTranslations("home");
 
   return (
@@ -48,14 +44,7 @@ export default function Map() {
               <h6>{t(planet.name)}</h6>
             )}
 
-            {planet.name === currentPlanet ? (
-              <motion.img
-                layoutId="spaceship"
-                src="/spaceship.png"
-                alt="Spaceship"
-                className="w-14 h-fit object-contain absolute top-0"
-              />
-            ) : null}
+            <SpaceshipImg planetName={planet.name} />
           </div>
         ))}
       </div>

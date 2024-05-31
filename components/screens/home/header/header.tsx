@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import LanguageDropdown from "./language-dropdown";
 import ShareDropdown from "./share-dropdown";
