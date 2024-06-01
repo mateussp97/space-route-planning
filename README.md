@@ -1,6 +1,6 @@
 # Space Route Planning System Documentation
 
-This document serves as a comprehensive guide for the Space Route Planning System developed to assist astronauts in planning trips throughout the solar system. The system is designed to be intuitive and functional, incorporating a realistic simulation of fuel consumption and identifying optimal refueling points.
+This document serves as a comprehensive guide for the Space Route Planning System developed to assist astronauts in planning trips throughout the solar system. The system is designed to be intuitive and functional, incorporating a realistic simulation of fuel consumption and identifying optimal refueling points. To know more, here's the [.pdf of the challenge.](https://drive.google.com/file/d/1NSnDXLw4NW0_uldhpIxLI6_v7PsU_ulq/view?usp=sharing)
 
 ## Preview
 
