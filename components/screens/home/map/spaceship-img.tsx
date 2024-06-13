@@ -2,7 +2,6 @@
 
 import { useSpaceTravelStore } from "@/atoms/stores/useSpaceTravelStore";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
 import { Fragment } from "react";
 
 interface SpaceshipImgProps {
@@ -11,7 +10,6 @@ interface SpaceshipImgProps {
 
 export default function SpaceshipImg({ planetName }: SpaceshipImgProps) {
   const { currentPlanet } = useSpaceTravelStore();
-  const t = useTranslations("home");
 
   if (planetName === currentPlanet) {
     return (
@@ -20,6 +18,7 @@ export default function SpaceshipImg({ planetName }: SpaceshipImgProps) {
         src="/spaceship.png"
         alt="Spaceship"
         className="w-14 h-fit object-contain absolute top-0"
+        data-testid={`components.screens.home.map.spaceship-img.${planetName}`}
       />
     );
   }

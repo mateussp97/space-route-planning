@@ -55,7 +55,7 @@ export default function RefuelAlert() {
         <div className="w-fit flex flex-col items-start gap-2">
           <div className="w-fit flex gap-2">
             <TriangleAlert className="h-4 w-4" />
-            <AlertTitle>
+            <AlertTitle data-testid="components.screens.home.refuel-alert.alert-title">
               {t(
                 isStranded
                   ? "you-are-stranded"
@@ -63,7 +63,10 @@ export default function RefuelAlert() {
               )}
             </AlertTitle>
           </div>
-          <AlertDescription className="text-muted-foreground">
+          <AlertDescription
+            data-testid="components.screens.home.refuel-alert.alert-description"
+            className="text-muted-foreground"
+          >
             {t(
               isStranded
                 ? "you-cannot-reach-any-refueling-station-or-other-planets-with-the-remaining-fuel"
@@ -76,6 +79,7 @@ export default function RefuelAlert() {
           onClick={handleRefuel}
           variant="secondary"
           className="w-full sm:w-fit"
+          data-testid="components.screens.home.refuel-alert.refuel-button"
         >
           {t(isStranded ? "ask-for-help" : "refuel-the-spaceship")}
         </Button>

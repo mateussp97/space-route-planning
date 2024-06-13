@@ -35,7 +35,12 @@ export default function LanguageDropdown({ locale }: LanguageDropdownProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="ml-auto gap-1.5 text-sm">
+        <Button
+          variant="outline"
+          size="sm"
+          className="ml-auto gap-1.5 text-sm"
+          data-testid="components.screens.home.header.language-dropdown.language-dropdown-trigger"
+        >
           <img
             className="w-5 h-fit object-contain mr-2"
             src={currentLanguage?.icon}

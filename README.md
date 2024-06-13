@@ -80,6 +80,7 @@ The system was developed with the following functional requirements in mind:
 - **framer-motion**
 - **dayjs**
 - **Vercel**
+- **Cypress**
 
 ## How to Run the Project
 
@@ -105,6 +106,14 @@ pnpm install
 
 ```bash
 pnpm run dev
+```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+
+6. (Optional) Running E2E Tests:
+
+```bash
+npx cypress run
 ```
 
 ## Conclusion

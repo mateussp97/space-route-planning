@@ -14,7 +14,10 @@ export default function Map() {
   const t = useTranslations("home");
 
   return (
-    <fieldset className="hidden md:grid gap-6 rounded-lg border p-4">
+    <fieldset
+      className="hidden md:grid gap-6 rounded-lg border p-4"
+      data-testid="components.screens.home.map.map"
+    >
       <legend className="-ml-1 px-1 text-sm font-medium">{t("map")}</legend>
 
       <div className="w-full flex items-center justify-between">
@@ -22,11 +25,13 @@ export default function Map() {
           <div
             className="max-w-24 w-full pt-8 flex flex-col items-center gap-4 relative"
             key={t(planet.name)}
+            data-testid={`components.screens.home.map.map.${planet.name}`}
           >
             <img
               className="w-full h-fit object-contain"
               src={planet.icon}
               alt={t(planet.name)}
+              data-testid={`components.screens.home.map.map.${planet.name}-icon`}
             />
 
             {refuelingStations.includes(planet.name) ? (

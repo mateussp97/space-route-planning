@@ -33,12 +33,17 @@ export default function Form() {
           <SelectTrigger
             id="current-location"
             className="items-start [&_[data-description]]:hidden"
+            data-testid="components.screens.home.form.current-location"
           >
             <SelectValue placeholder={t("selecte-a-planet")} />
           </SelectTrigger>
           <SelectContent>
             {planets.map((planet) => (
-              <SelectItem key={planet.name} value={planet.name}>
+              <SelectItem
+                key={planet.name}
+                value={planet.name}
+                data-testid={`components.screens.home.form.current-planet-${planet.name}`}
+              >
                 <div className="flex items-start gap-3 text-muted-foreground">
                   <Image
                     src={planet.icon}
@@ -65,6 +70,7 @@ export default function Form() {
           <SelectTrigger
             id="destination"
             className="items-start [&_[data-description]]:hidden"
+            data-testid="components.screens.home.form.destination"
           >
             <SelectValue placeholder={t("selecte-a-planet")} />
           </SelectTrigger>
@@ -72,7 +78,11 @@ export default function Form() {
             {planets
               .filter((planet) => planet.name !== currentPlanet)
               .map((planet) => (
-                <SelectItem key={planet.name} value={planet.name}>
+                <SelectItem
+                  key={planet.name}
+                  value={planet.name}
+                  data-testid={`components.screens.home.form.destination-planet-${planet.name}`}
+                >
                   <div className="flex items-start gap-3 text-muted-foreground">
                     <Image
                       src={planet.icon}
@@ -93,7 +103,12 @@ export default function Form() {
         </Select>
       </div>
 
-      <Button type="button" onClick={submitTrip} disabled={!destinationPlanet}>
+      <Button
+        type="button"
+        onClick={submitTrip}
+        disabled={!destinationPlanet}
+        data-testid="components.screens.home.form.submit-trip"
+      >
         {t("make-the-journey")}
       </Button>
     </fieldset>

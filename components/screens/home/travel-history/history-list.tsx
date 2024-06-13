@@ -22,7 +22,10 @@ export default function HistoryList() {
 
   if (travelHistory.length > 0) {
     return (
-      <ul className="w-full flex flex-col gap-3">
+      <ul
+        className="w-full flex flex-col gap-3"
+        data-testid="components.screens.home.travel-history.history-list"
+      >
         {travelHistory
           .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
           .map((travel, index) => {
@@ -33,24 +36,39 @@ export default function HistoryList() {
             );
 
             return (
-              <li key={index} className="w-full flex flex-col gap-3">
+              <li
+                key={index}
+                className="w-full flex flex-col gap-3"
+                data-testid={`components.screens.home.travel-history.history-list.history-list-item-${index}`}
+              >
                 <ul className="w-full flex flex-col gap-3">
                   <div className="w-full flex items-center justify-between">
                     <li className="flex items-center gap-2">
                       <p className="text-muted-foreground">{t("date")}:</p>
-                      <p>{date}</p>
+                      <p
+                        data-testid={`components.screens.home.travel-history.history-list.history-list-item-${index}-date`}
+                      >
+                        {date}
+                      </p>
                     </li>
 
                     <li className="flex items-center gap-2">
                       <p className="text-muted-foreground">{t("time")}:</p>
-                      <p>{time}</p>
+                      <p
+                        data-testid={`components.screens.home.travel-history.history-list.history-list-item-${index}-time`}
+                      >
+                        {time}
+                      </p>
                     </li>
                   </div>
 
                   <div className="w-full flex items-center justify-between">
                     <li className="flex items-center gap-2">
                       <p className="text-muted-foreground">{t("from")}:</p>
-                      <p className="flex items-center gap-2">
+                      <p
+                        className="flex items-center gap-2"
+                        data-testid={`components.screens.home.travel-history.history-list.history-list-item-${index}-from`}
+                      >
                         {travelCurrentPlanetIcon && (
                           <Image
                             src={travelCurrentPlanetIcon}
@@ -65,7 +83,10 @@ export default function HistoryList() {
 
                     <li className="flex items-center gap-2">
                       <p className="text-muted-foreground">{t("to")}:</p>
-                      <p className="flex items-center gap-2">
+                      <p
+                        className="flex items-center gap-2"
+                        data-testid={`components.screens.home.travel-history.history-list.history-list-item-${index}-to`}
+                      >
                         {travelDestinationPlanetIcon && (
                           <Image
                             src={travelDestinationPlanetIcon}
@@ -83,7 +104,9 @@ export default function HistoryList() {
                     <p className="text-muted-foreground">
                       {t("fuel-before-travel")}:
                     </p>
-                    <p>
+                    <p
+                      data-testid={`components.screens.home.travel-history.history-list.history-list-item-${index}-fuel-before-travel`}
+                    >
                       {t("fuel-capacity-in-liters", {
                         fuel: formatNumber(travel.availableFuel, lang),
                       })}
@@ -92,7 +115,9 @@ export default function HistoryList() {
 
                   <li className="flex items-center justify-between">
                     <p className="text-muted-foreground">{t("spent-fuel")}:</p>
-                    <p>
+                    <p
+                      data-testid={`components.screens.home.travel-history.history-list.history-list-item-${index}-spent-fuel`}
+                    >
                       {t("fuel-capacity-in-liters", {
                         fuel: formatNumber(travel.requiredFuel, lang),
                       })}
@@ -110,7 +135,10 @@ export default function HistoryList() {
   }
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center gap-2">
+    <div
+      className="w-full h-full flex flex-col items-center justify-center text-center text-balance gap-2"
+      data-testid="components.screens.home.travel-history.history-list.history-list-empty"
+    >
       <h2 className="text-2xl font-semibold">
         {t("empty-travel-history-title")}
       </h2>

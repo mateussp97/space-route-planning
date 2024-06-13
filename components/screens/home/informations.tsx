@@ -39,7 +39,7 @@ export default function Informations() {
         <li className="flex flex-col gap-3">
           <span className="flex items-center justify-between">
             <p className="text-muted-foreground">{t("fuel-available")}:</p>
-            <p>
+            <p data-testid="components.screens.home.informations.fuel-available-value">
               {t("fuel-capacity-in-liters", {
                 fuel: formatNumber(availableFuel, lang),
               })}{" "}
@@ -53,7 +53,10 @@ export default function Informations() {
           <p className="text-muted-foreground">
             {t("nearest-refueling-station")}:
           </p>
-          <p className="flex items-center gap-2">
+          <p
+            data-testid="components.screens.home.informations.nearest-refueling-station-value"
+            className="flex items-center gap-2"
+          >
             {nearestRefuelingStationIcon && (
               <Image
                 src={nearestRefuelingStationIcon}
@@ -75,7 +78,7 @@ export default function Informations() {
               <span className="text-muted-foreground">
                 {t("required-fuel")}
               </span>
-              <span>
+              <span data-testid="components.screens.home.informations.required-fuel-value">
                 {t("fuel-capacity-in-liters", {
                   fuel: formatNumber(requiredFuel, lang),
                 })}
@@ -85,7 +88,9 @@ export default function Informations() {
               <span className="text-muted-foreground">
                 {t("can-you-travel")}
               </span>
-              <span>{isTripPossible ? t("yes") : t("no")}</span>
+              <span data-testid="components.screens.home.informations.can-you-travel-value">
+                {isTripPossible ? t("yes") : t("no")}
+              </span>
             </li>
           </ul>
         </div>
