@@ -24,6 +24,7 @@ const travelHistoryAtom = atom<
     createdAt: Date;
   }[]
 >([]);
+// Read-only atom - https://jotai.org/docs/core/atom
 const isStrandedAtom = atom<boolean>((get) => {
   // Obtém o planeta atual.
   const currentPlanet = get(currentPlanetAtom);

@@ -10,6 +10,10 @@ This document serves as a comprehensive guide for the Space Route Planning Syste
 
 [Click to open the project](https://latitudesh-spaceship.vercel.app)
 
+## Relation of Functional Requirements and Components
+
+![](./public/latitudesh-spaceship-frxc.png)
+
 ## Functional Requirements
 
 The system was developed with the following functional requirements in mind:
@@ -110,7 +114,7 @@ pnpm run dev
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-6. (Optional) Running E2E Tests:
+6. (Optional) Running Cypress Tests:
 
 ```bash
 npx cypress run
