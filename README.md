@@ -10,10 +10,6 @@ This document serves as a comprehensive guide for the Space Route Planning Syste
 
 [Click to open the project](https://latitudesh-spaceship.vercel.app)
 
-## Relation of Functional Requirements and Components
-
-![](./public/latitudesh-spaceship-frxc.png)
-
 ## Functional Requirements
 
 The system was developed with the following functional requirements in mind:

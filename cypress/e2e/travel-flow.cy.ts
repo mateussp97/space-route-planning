@@ -17,23 +17,7 @@ describe("Travel Flow", () => {
   });
 
   it("should display the map with planets and refueling stations and the spaceship image on the current planet", () => {
-    cy.get('[data-testid="components.screens.home.map.map"]').should(
-      "be.visible"
-    );
-
-    planets.forEach((planet) => {
-      const planetTestId = `components.screens.home.map.map.${planet.name}`;
-
-      cy.get(`[data-testid="${planetTestId}"]`).within(() => {
-        cy.get(`[data-testid="${planetTestId}-icon"]`).should("be.visible");
-
-        if (planet.name === "jupiter") {
-          cy.get(
-            `[data-testid="components.screens.home.map.spaceship-img.${planet.name}"]`
-          ).should("be.visible");
-        }
-      });
-    });
+    cy.verifySpaceshipPosition("jupiter");
   });
 
   it("should display information before selecting a value for the destination field", () => {
