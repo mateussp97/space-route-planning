@@ -14,7 +14,6 @@ import { langAtom } from "../langAtom";
 const currentPlanetAtom = atom<string>("jupiter");
 const destinationPlanetAtom = atom<string>("");
 const availableFuelAtom = atom<number>(fuelTankCapacity);
-
 const travelHistoryAtom = atom<
   {
     currentPlanet: string;
@@ -24,7 +23,29 @@ const travelHistoryAtom = atom<
     createdAt: Date;
   }[]
 >([]);
-// Read-only atom - https://jotai.org/docs/core/atom
+
+// Átomo de somente leitura para calcular o combustível necessário
+const requiredFuelAtom = atom<number>((get) => {
+  const currentPlanet = get(currentPlanetAtom);
+  const destinationPlanet = get(destinationPlanetAtom);
+
+  // Calcula o combustível necessário multiplicando a distância pelo consumo de combustível.
+  // Se nenhum destino for selecionado, o combustível necessário é zero.
+  return destinationPlanet
+    ? getDistance(currentPlanet, destinationPlanet) * fuelConsumptionRatio
+    : 0;
+});
+
+// Átomo de somente leitura para verificar se a viagem é possível
+const isTripPossibleAtom = atom<boolean>((get) => {
+  const availableFuel = get(availableFuelAtom);
+  const requiredFuel = get(requiredFuelAtom);
+
+  // Verifica se o combustível disponível é suficiente para a viagem.
+  return availableFuel >= requiredFuel;
+});
+
+// Átomo de somente leitura para verificar se está encalhado
 const isStrandedAtom = atom<boolean>((get) => {
   // Obtém o planeta atual.
   const currentPlanet = get(currentPlanetAtom);
@@ -59,17 +80,11 @@ export function useSpaceTravelStore() {
   );
   const [availableFuel, setAvailableFuel] = useAtom(availableFuelAtom);
   const [travelHistory, setTravelHistory] = useAtom(travelHistoryAtom);
+
+  const requiredFuel = useAtomValue(requiredFuelAtom);
+  const isTripPossible = useAtomValue(isTripPossibleAtom);
   const isStranded = useAtomValue(isStrandedAtom);
   const lang = useAtomValue(langAtom);
-
-  // Calcula o combustível necessário multiplicando a distância pelo consumo de combustível.
-  // Se nenhum destino for selecionado, o combustível necessário é zero.
-  const requiredFuel = destinationPlanet
-    ? getDistance(currentPlanet, destinationPlanet) * fuelConsumptionRatio
-    : 0;
-
-  // Verifica se o combustível disponível é suficiente para a viagem.
-  const isTripPossible = availableFuel >= requiredFuel;
 
   // Função para encontrar a estação de reabastecimento mais próxima.
   // Usa a função getDistance para calcular a distância entre a localização atual e cada estação disponível,

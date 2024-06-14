@@ -47,14 +47,14 @@ export function getDistance(from: string, to: string): number {
   // Variável para acumular a distância total entre os planetas.
   let distance = 0;
 
-  // Calcula a distância se o destino estiver após o planeta de origem na lista.
+  // Verifica se o ponto de origem é anterior ao ponto de destino na lista de planetas.
   if (startIndex < endIndex) {
-    // Soma as distâncias entre os planetas consecutivos do ponto de origem até o destino.
+    // Percorre a lista de planetas do ponto de origem até o destino, somando as distâncias entre planetas consecutivos.
     for (let i = startIndex; i < endIndex; i++) {
       distance += planetDistances[`${planets[i]}_${planets[i + 1]}`];
     }
   } else {
-    // Calcula a distância se o destino estiver antes do planeta de origem na lista.
+    // Percorre a lista de planetas do ponto de origem até o destino, somando as distâncias entre planetas consecutivos em ordem inversa.
     for (let i = startIndex; i > endIndex; i--) {
       distance += planetDistances[`${planets[i - 1]}_${planets[i]}`];
     }
