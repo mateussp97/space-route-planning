@@ -1,5 +1,3 @@
-import { planets } from "@/utils/constants";
-
 describe("Travel Flow", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000");
@@ -16,7 +14,7 @@ describe("Travel Flow", () => {
     });
   });
 
-  it("should display the map with planets and refueling stations and the spaceship image on the current planet", () => {
+  it("should display the map with planets, refueling stations and the spaceship image on the current planet", () => {
     cy.verifySpaceshipPosition("jupiter");
   });
 
