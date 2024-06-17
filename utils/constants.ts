@@ -18,6 +18,8 @@ export const fuelTankCapacity = 90000;
 // Consumo de combustível em litros por quilômetro.
 export const fuelConsumptionRatio = 0.0001;
 
+export const wormholeFuelConsumptionRatio = 0.0002;
+
 // Lista de planetas com estações de reabastecimento.
 export const refuelingStations = ["mercury", "earth", "saturn", "uranus"];
 

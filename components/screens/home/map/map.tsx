@@ -9,6 +9,7 @@ import { planets, refuelingStations } from "@/utils/constants";
 import { Fuel } from "lucide-react";
 import { useTranslations } from "next-intl";
 import SpaceshipImg from "./spaceship-img";
+import Wormhole from "./wormhole-img";
 
 export default function Map() {
   const t = useTranslations("home");
@@ -50,6 +51,10 @@ export default function Map() {
             )}
 
             <SpaceshipImg planetName={planet.name} />
+
+            {(planet.name === "mercury" || planet.name === "saturn") && (
+              <Wormhole />
+            )}
           </div>
         ))}
       </div>

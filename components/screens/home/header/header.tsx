@@ -1,10 +1,13 @@
-import Link from "next/link";
 import LanguageDropdown from "./language-dropdown";
+import RestartButton from "./restart-button";
 import ShareDropdown from "./share-dropdown";
+import UndoButton from "./undo-button";
 
 import LatitudeSh from "@/public/latitude-sh.svg";
+
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 
 interface HeaderProps {
   locale: string;
@@ -41,6 +44,8 @@ export default function Header({ locale }: HeaderProps) {
         </div>
 
         <div className="w-fit flex items-center gap-4">
+          <RestartButton />
+          <UndoButton />
           <LanguageDropdown locale={locale} />
           <ShareDropdown />
         </div>

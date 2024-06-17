@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
 import { useCallback } from "react";
 import { langAtom } from "../langAtom";
 
-const currentPlanetAtom = atom<string>("jupiter");
+const currentPlanetAtom = atom<string>("earth");
 const destinationPlanetAtom = atom<string>("");
 const availableFuelAtom = atom<number>(fuelTankCapacity);
 const travelHistoryAtom = atom<
@@ -182,6 +182,38 @@ export function useSpaceTravelStore() {
     setAvailableFuel(fuelTankCapacity);
   }, [currentPlanet]);
 
+  // Função de restart: Limpa o histórico, reseta o combustível e mantém o planeta atual
+  const restart = useCallback(() => {
+    setCurrentPlanet("earth");
+    setDestinationPlanet("");
+    setAvailableFuel(fuelTankCapacity);
+    setTravelHistory([]);
+    toast({
+      variant: "positive",
+      title: "Restart Successful",
+      description:
+        "The game has been restarted. All travel history has been cleared.",
+    });
+  }, []);
+
+  // Função de undo: Desfaz a última viagem feita
+  const undoLastTrip = useCallback(() => {
+    setTravelHistory((prevHistory) => {
+      if (prevHistory.length === 0) return prevHistory;
+
+      const lastTrip = prevHistory[0];
+
+      setCurrentPlanet(lastTrip.currentPlanet);
+      setAvailableFuel(lastTrip.availableFuel);
+      toast({
+        variant: "positive",
+        title: "Undo Successful",
+        description: `Undid the last trip from ${lastTrip.destinationPlanet} to ${lastTrip.currentPlanet}.`,
+      });
+      return prevHistory.slice(0, -1);
+    });
+  }, [setCurrentPlanet, setAvailableFuel]);
+
   return {
     currentPlanet,
     destinationPlanet,
@@ -192,10 +224,14 @@ export function useSpaceTravelStore() {
     requiredFuel,
     isStranded,
     methods: {
+      setCurrentPlanet,
       setDestinationPlanet,
       setAvailableFuel,
+      setTravelHistory,
       submitTrip,
       refuel,
+      restart,
+      undoLastTrip,
     },
   };
 }
