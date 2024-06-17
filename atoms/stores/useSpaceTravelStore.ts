@@ -151,6 +151,7 @@ export function useSpaceTravelStore() {
       });
       // Reseta o destino selecionado após a viagem.
       setDestinationPlanet("");
+      return true;
     } else {
       // Exibe uma notificação de erro se a viagem não for possível.
       toast({
@@ -168,6 +169,7 @@ export function useSpaceTravelStore() {
           }),
         }),
       });
+      return false;
     }
   }, [
     isTripPossible,
@@ -201,8 +203,15 @@ export function useSpaceTravelStore() {
     setTravelHistory((prevHistory) => {
       if (prevHistory.length === 0) return prevHistory;
 
-      const lastTrip = prevHistory[0];
+      // Ordena o histórico de viagens por data de criação, do mais recente para o mais antigo.
+      const sortedHistory = [...prevHistory].sort(
+        (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+      );
 
+      // Obtém a última viagem do histórico ordenado.
+      const lastTrip = sortedHistory[0];
+
+      // Atualiza o planeta atual e o combustível disponível com os valores da última viagem.
       setCurrentPlanet(lastTrip.currentPlanet);
       setAvailableFuel(lastTrip.availableFuel);
       toast({
@@ -210,7 +219,9 @@ export function useSpaceTravelStore() {
         title: "Undo Successful",
         description: `Undid the last trip from ${lastTrip.destinationPlanet} to ${lastTrip.currentPlanet}.`,
       });
-      return prevHistory.slice(0, -1);
+
+      // Retorna o histórico de viagens sem a última viagem.
+      return sortedHistory.slice(1);
     });
   }, [setCurrentPlanet, setAvailableFuel]);
 
