@@ -11,7 +11,7 @@ import { useTranslations } from "next-intl";
 import { useCallback } from "react";
 import { langAtom } from "../langAtom";
 
-const currentPlanetAtom = atom<string>("jupiter");
+const currentPlanetAtom = atom<string>("earth");
 const destinationPlanetAtom = atom<string>("");
 const availableFuelAtom = atom<number>(fuelTankCapacity);
 const travelHistoryAtom = atom<
@@ -151,6 +151,7 @@ export function useSpaceTravelStore() {
       });
       // Resets the selected destination after the trip.
       setDestinationPlanet("");
+      return true;
     } else {
       // Displays an error notification if the trip is not possible.
       toast({
@@ -168,6 +169,7 @@ export function useSpaceTravelStore() {
           }),
         }),
       });
+      return false;
     }
   }, [
     isTripPossible,
@@ -182,6 +184,47 @@ export function useSpaceTravelStore() {
     setAvailableFuel(fuelTankCapacity);
   }, [currentPlanet]);
 
+  // Função de restart: Limpa o histórico, reseta o combustível e mantém o planeta atual
+  const restart = useCallback(() => {
+    setCurrentPlanet("earth");
+    setDestinationPlanet("");
+    setAvailableFuel(fuelTankCapacity);
+    setTravelHistory([]);
+    toast({
+      variant: "positive",
+      title: "Restart Successful",
+      description:
+        "The game has been restarted. All travel history has been cleared.",
+    });
+  }, []);
+
+  // Função de undo: Desfaz a última viagem feita
+  const undoLastTrip = useCallback(() => {
+    setTravelHistory((prevHistory) => {
+      if (prevHistory.length === 0) return prevHistory;
+
+      // Ordena o histórico de viagens por data de criação, do mais recente para o mais antigo.
+      const sortedHistory = [...prevHistory].sort(
+        (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+      );
+
+      // Obtém a última viagem do histórico ordenado.
+      const lastTrip = sortedHistory[0];
+
+      // Atualiza o planeta atual e o combustível disponível com os valores da última viagem.
+      setCurrentPlanet(lastTrip.currentPlanet);
+      setAvailableFuel(lastTrip.availableFuel);
+      toast({
+        variant: "positive",
+        title: "Undo Successful",
+        description: `Undid the last trip from ${lastTrip.destinationPlanet} to ${lastTrip.currentPlanet}.`,
+      });
+
+      // Retorna o histórico de viagens sem a última viagem.
+      return sortedHistory.slice(1);
+    });
+  }, [setCurrentPlanet, setAvailableFuel]);
+
   return {
     currentPlanet,
     destinationPlanet,
@@ -192,10 +235,14 @@ export function useSpaceTravelStore() {
     requiredFuel,
     isStranded,
     methods: {
+      setCurrentPlanet,
       setDestinationPlanet,
       setAvailableFuel,
+      setTravelHistory,
       submitTrip,
       refuel,
+      restart,
+      undoLastTrip,
     },
   };
 }

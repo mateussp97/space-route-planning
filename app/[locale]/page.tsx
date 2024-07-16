@@ -4,6 +4,7 @@ import Informations from "@/components/screens/home/informations";
 import Map from "@/components/screens/home/map/map";
 import RefuelAlert from "@/components/screens/home/refuel-alert";
 import TravelHistory from "@/components/screens/home/travel-history/travel-history";
+import WormholeAlert from "@/components/screens/home/wormhole-alert";
 
 import { getTranslations } from "next-intl/server";
 
@@ -28,6 +29,7 @@ export default function Page({ params }: { params: { locale: string } }) {
       <Header locale={params.locale} />
       <div className="w-full h-fit bg-transparent py-8 px-4 flex flex-col">
         <div className="max-w-7xl w-full h-fit mx-auto grid grid-cols-1">
+          <WormholeAlert />
           <RefuelAlert />
 
           <div className="w-full h-fit mb-8 grid grid-cols-1 md:grid-cols-2 items-stretch gap-8">

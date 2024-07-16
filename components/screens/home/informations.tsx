@@ -12,9 +12,15 @@ import { langAtom } from "@/atoms/langAtom";
 import { useAtomValue } from "jotai";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { Fragment } from "react";
 
-export default function Informations() {
+interface InformationsProps {
+  isAlert?: boolean;
+}
+
+export default function Informations({ isAlert = false }: InformationsProps) {
   const {
+    currentPlanet,
     availableFuel,
     destinationPlanet,
     isTripPossible,
@@ -74,6 +80,37 @@ export default function Informations() {
         <div className="grid pt-3 gap-3">
           <Separator className="my-2" />
           <ul className="grid gap-3">
+            {isAlert && (
+              <Fragment>
+                <li className="flex items-center justify-between">
+                  <span className="text-muted-foreground">
+                    Localização Atual
+                  </span>
+                  <p className="flex items-center gap-2">
+                    <Image
+                      src={getPlanetIcon(currentPlanet)!}
+                      alt={currentPlanet}
+                      width={20}
+                      height={20}
+                    />
+                    {t(currentPlanet)}
+                  </p>
+                </li>
+                <li className="flex items-center justify-between">
+                  <span className="text-muted-foreground">Destino</span>
+                  <p className="flex items-center gap-2">
+                    <Image
+                      src={getPlanetIcon(destinationPlanet)!}
+                      alt={destinationPlanet}
+                      width={20}
+                      height={20}
+                    />
+                    {t(destinationPlanet)}
+                  </p>
+                </li>
+              </Fragment>
+            )}
+
             <li className="flex items-center justify-between">
               <span className="text-muted-foreground">
                 {t("required-fuel")}

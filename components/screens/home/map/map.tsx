@@ -6,9 +6,11 @@ import {
 
 import { planets, refuelingStations } from "@/utils/constants";
 
+import { TripAlert } from "@/components/global/alerts/trip-alert";
 import { Fuel } from "lucide-react";
 import { useTranslations } from "next-intl";
 import SpaceshipImg from "./spaceship-img";
+import Wormhole from "./wormhole-img";
 
 export default function Map() {
   const t = useTranslations("home");
@@ -27,12 +29,16 @@ export default function Map() {
             key={t(planet.name)}
             data-testid={`components.screens.home.map.map.${planet.name}`}
           >
-            <img
-              className="w-full h-fit object-contain"
-              src={planet.icon}
-              alt={t(planet.name)}
-              data-testid={`components.screens.home.map.map.${planet.name}-icon`}
-            />
+            <TripAlert destinationPlanet={planet.name}>
+              <div className="cursor-pointer">
+                <img
+                  className="w-24 h-24 object-contain"
+                  src={planet.icon}
+                  alt={t(planet.name)}
+                  data-testid={`components.screens.home.map.map.${planet.name}-icon`}
+                />
+              </div>
+            </TripAlert>
 
             {refuelingStations.includes(planet.name) ? (
               <Tooltip>
@@ -50,6 +56,10 @@ export default function Map() {
             )}
 
             <SpaceshipImg planetName={planet.name} />
+
+            {(planet.name === "mercury" || planet.name === "saturn") && (
+              <Wormhole />
+            )}
           </div>
         ))}
       </div>
