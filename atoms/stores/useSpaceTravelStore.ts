@@ -24,41 +24,41 @@ const travelHistoryAtom = atom<
   }[]
 >([]);
 
-// Átomo de somente leitura para calcular o combustível necessário
+// Read-only atom to calculate the required fuel
 const requiredFuelAtom = atom<number>((get) => {
   const currentPlanet = get(currentPlanetAtom);
   const destinationPlanet = get(destinationPlanetAtom);
 
-  // Calcula o combustível necessário multiplicando a distância pelo consumo de combustível.
-  // Se nenhum destino for selecionado, o combustível necessário é zero.
+  // Calculates the required fuel by multiplying the distance by the fuel consumption ratio.
+  // If no destination is selected, the required fuel is zero.
   return destinationPlanet
     ? getDistance(currentPlanet, destinationPlanet) * fuelConsumptionRatio
     : 0;
 });
 
-// Átomo de somente leitura para verificar se a viagem é possível
+// Read-only atom to check if the trip is possible
 const isTripPossibleAtom = atom<boolean>((get) => {
   const availableFuel = get(availableFuelAtom);
   const requiredFuel = get(requiredFuelAtom);
 
-  // Verifica se o combustível disponível é suficiente para a viagem.
+  // Checks if the available fuel is enough for the trip.
   return availableFuel >= requiredFuel;
 });
 
-// Átomo de somente leitura para verificar se está encalhado
+// Read-only atom to check if stranded
 const isStrandedAtom = atom<boolean>((get) => {
-  // Obtém o planeta atual.
+  // Gets the current planet.
   const currentPlanet = get(currentPlanetAtom);
-  // Obtém o combustível disponível.
+  // Gets the available fuel.
   const availableFuel = get(availableFuelAtom);
 
-  // Verifica se há alguma estação de reabastecimento ao alcance com o combustível disponível.
+  // Checks if there is any refueling station within reach with the available fuel.
   const canReachAnyRefuelingStation = refuelingStations.some((station) => {
     const distanceToStation = getDistance(currentPlanet, station);
     return availableFuel >= distanceToStation * fuelConsumptionRatio;
   });
 
-  // Verifica se pode alcançar qualquer outro planeta que não seja o atual.
+  // Checks if it can reach any other planet other than the current one.
   const canReachAnyPlanet = planets.some((planet) => {
     if (planet.name !== currentPlanet) {
       const distanceToPlanet = getDistance(currentPlanet, planet.name);
@@ -67,7 +67,7 @@ const isStrandedAtom = atom<boolean>((get) => {
     return false;
   });
 
-  // Retorna true se não puder alcançar nenhuma estação de reabastecimento ou outro planeta.
+  // Returns true if it cannot reach any refueling station or other planet.
   return !(canReachAnyRefuelingStation || canReachAnyPlanet);
 });
 
@@ -86,43 +86,43 @@ export function useSpaceTravelStore() {
   const isStranded = useAtomValue(isStrandedAtom);
   const lang = useAtomValue(langAtom);
 
-  // Função para encontrar a estação de reabastecimento mais próxima.
-  // Usa a função getDistance para calcular a distância entre a localização atual e cada estação disponível,
-  // excluindo a possibilidade do planeta atual ser considerado uma estação de reabastecimento.
+  // Function to find the nearest refueling station.
+  // Uses the getDistance function to calculate the distance between the current location and each available station,
+  // excluding the possibility of the current planet being considered a refueling station.
   const nearestRefuelStation = (() => {
-    // Inicializa a variável que vai armazenar a estação mais próxima.
+    // Initializes the variable that will store the closest station.
     let closestStation = null;
-    // Define a distância inicial como infinita para garantir que qualquer distância real seja menor.
+    // Sets the initial distance to infinity to ensure any real distance is shorter.
     let minDistance = Infinity;
 
-    // Filtra as estações de reabastecimento para excluir o planeta atual da lista de verificações,
-    // pois não podemos considerar o planeta atual como uma opção de reabastecimento.
+    // Filters the refueling stations to exclude the current planet from the checks,
+    // as we cannot consider the current planet as a refueling option.
     refuelingStations
       .filter((station) => station !== currentPlanet)
       .forEach((station) => {
-        // Calcula a distância do planeta atual até a estação que está sendo iterada.
+        // Calculates the distance from the current planet to the iterated station.
         const distance = getDistance(currentPlanet, station);
 
-        // Se a distância calculada for menor que a menor distância encontrada até agora,
-        // atualiza a menor distância e a estação mais próxima.
+        // If the calculated distance is shorter than the shortest distance found so far,
+        // updates the shortest distance and the closest station.
         if (distance < minDistance) {
           minDistance = distance;
           closestStation = station;
         }
       });
 
-    // Retorna a estação mais próxima encontrada ou null se nenhuma for acessível.
+    // Returns the closest station found or null if none are accessible.
     return closestStation;
   })();
 
-  // Executa a viagem se possível, atualiza o histórico e mostra uma notificação relevante.
+  // Executes the trip if possible, updates the history, and shows a relevant notification.
   const submitTrip = useCallback(() => {
     if (isTripPossible) {
-      // Atualiza a localização atual para o destino escolhido.
+      // Updates the current location to the chosen destination.
       setCurrentPlanet(destinationPlanet);
-      // Deduz o combustível necessário do combustível disponível.
+      // Deducts the required fuel from the available fuel.
       setAvailableFuel((prevFuel) => prevFuel - requiredFuel);
-      // Adiciona a viagem atual ao histórico de viagens.
+      // Adds the current trip to the travel history.
       setTravelHistory((prevHistory) => [
         ...prevHistory,
         {
@@ -133,7 +133,7 @@ export function useSpaceTravelStore() {
           createdAt: new Date(),
         },
       ]);
-      // Exibe uma notificação de sucesso.
+      // Displays a success notification.
       toast({
         variant: "positive",
         title: t("trip-successful-title", {
@@ -149,10 +149,10 @@ export function useSpaceTravelStore() {
           }),
         }),
       });
-      // Reseta o destino selecionado após a viagem.
+      // Resets the selected destination after the trip.
       setDestinationPlanet("");
     } else {
-      // Exibe uma notificação de erro se a viagem não for possível.
+      // Displays an error notification if the trip is not possible.
       toast({
         variant: "destructive",
         title: t("trip-not-possible-title", {
@@ -177,7 +177,7 @@ export function useSpaceTravelStore() {
     requiredFuel,
   ]);
 
-  // Reabastece o tanque até a sua capacidade máxima.
+  // Refuels the tank to its maximum capacity.
   const refuel = useCallback(() => {
     setAvailableFuel(fuelTankCapacity);
   }, [currentPlanet]);

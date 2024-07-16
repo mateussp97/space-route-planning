@@ -24,12 +24,12 @@ export function formatNumber(number: number, lang: string) {
   return new Intl.NumberFormat(locale[lang]).format(number);
 }
 
-// Função para calcular a distância entre dois planetas especificados.
+// Function to calculate the distance between two specified planets.
 export function getDistance(from: string, to: string): number {
-  // Se o planeta de origem e destino são o mesmo, a distância é zero.
+  // If the origin and destination planets are the same, the distance is zero.
   if (from === to) return 0;
 
-  // Lista de planetas ordenada do mais próximo ao mais distante do sol.
+  // List of planets ordered from the closest to the farthest from the sun.
   const planets = [
     "mercury",
     "venus",
@@ -40,26 +40,26 @@ export function getDistance(from: string, to: string): number {
     "uranus",
   ];
 
-  // Encontra os índices dos planetas de origem e destino na lista ordenada.
+  // Find the indices of the origin and destination planets in the ordered list.
   const startIndex = planets.indexOf(from);
   const endIndex = planets.indexOf(to);
 
-  // Variável para acumular a distância total entre os planetas.
+  // Variable to accumulate the total distance between the planets.
   let distance = 0;
 
-  // Verifica se o ponto de origem é anterior ao ponto de destino na lista de planetas.
+  // Check if the starting point is before the destination point in the planet list.
   if (startIndex < endIndex) {
-    // Percorre a lista de planetas do ponto de origem até o destino, somando as distâncias entre planetas consecutivos.
+    // Iterate through the planet list from the starting point to the destination, summing the distances between consecutive planets.
     for (let i = startIndex; i < endIndex; i++) {
       distance += planetDistances[`${planets[i]}_${planets[i + 1]}`];
     }
   } else {
-    // Percorre a lista de planetas do ponto de origem até o destino, somando as distâncias entre planetas consecutivos em ordem inversa.
+    // Iterate through the planet list from the starting point to the destination, summing the distances between consecutive planets in reverse order.
     for (let i = startIndex; i > endIndex; i--) {
       distance += planetDistances[`${planets[i - 1]}_${planets[i]}`];
     }
   }
 
-  // Retorna a distância total calculada.
+  // Return the calculated total distance.
   return distance;
 }

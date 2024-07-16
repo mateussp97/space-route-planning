@@ -2,7 +2,7 @@ interface PlanetDistances {
   [key: string]: number;
 }
 
-// Distâncias entre os planetas conforme especificado na documentação.
+// Distances between planets as specified in the documentation.
 export const planetDistances: PlanetDistances = {
   mercury_venus: 50000000,
   venus_earth: 40000000,
@@ -12,16 +12,16 @@ export const planetDistances: PlanetDistances = {
   saturn_uranus: 900000000,
 };
 
-// Capacidade do tanque de combustível em litros.
+// Fuel tank capacity in liters.
 export const fuelTankCapacity = 90000;
 
-// Consumo de combustível em litros por quilômetro.
+// Fuel consumption ratio in liters per kilometer.
 export const fuelConsumptionRatio = 0.0001;
 
-// Lista de planetas com estações de reabastecimento.
+// List of planets with refueling stations.
 export const refuelingStations = ["mercury", "earth", "saturn", "uranus"];
 
-// Lista de planetas.
+// List of planets.
 export const planets = [
   {
     icon: "./mercury.svg",
@@ -60,7 +60,7 @@ export const planets = [
   },
 ];
 
-// Lista de idiomas da aplicação.
+// List of application languages.
 export const languages = [
   {
     title: "portuguese",
@@ -74,4 +74,4 @@ export const languages = [
   },
 ];
 
-export const URL = "https://latitudesh-spaceship.vercel.app/";
+export const URL = "https://space-route-planning.vercel.app/";

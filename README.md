@@ -4,11 +4,11 @@ This document serves as a comprehensive guide for the Space Route Planning Syste
 
 ## Preview
 
-![](./public/latitudesh-spaceship.gif)
+![](./public/space-route-planning.gif)
 
 ## Link
 
-[Click to open the project](https://latitudesh-spaceship.vercel.app)
+[Click to open the project](https://space-route-planning.vercel.app)
 
 ## Functional Requirements
 
@@ -87,13 +87,13 @@ The system was developed with the following functional requirements in mind:
 1. Clone this repository:
 
 ```bash
-git clone https://github.com/mateussp97/latitudesh-spaceship.git
+git clone https://github.com/mateussp97/space-route-planning.git
 ```
 
 2. Navigate to the project directory:
 
 ```bash
-cd latitudesh-spaceship
+cd space-route-planning
 ```
 
 3. Navigate to the project directory:
